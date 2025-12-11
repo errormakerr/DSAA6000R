@@ -1,0 +1,745 @@
+{
+  "timestamp": "2025-12-11T13:58:16.629481",
+  "summary": {
+    "total_samples": 15,
+    "successful_samples": 14,
+    "failed_samples": 1,
+    "total_tokens": 44349,
+    "total_prompt_tokens": 40971,
+    "total_completion_tokens": 3378,
+    "avg_tokens_per_sample": 2956.6,
+    "avg_tokens_success": 2668.9285714285716,
+    "avg_tokens_failed": 6984.0,
+    "max_tokens_sample": {
+      "sample_id": "sample_1",
+      "question": "Show all staff names who have been both speaker and sponsor in some conference.",
+      "db_id": "conference",
+      "prompt_tokens": 6355,
+      "completion_tokens": 629,
+      "total_tokens": 6984,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 591,
+          "completion_tokens": 53,
+          "total_tokens": 644
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 410,
+          "completion_tokens": 68,
+          "total_tokens": 478
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 714,
+          "completion_tokens": 114,
+          "total_tokens": 828
+        },
+        {
+          "step": 3,
+          "action": "ReActStep",
+          "prompt_tokens": 852,
+          "completion_tokens": 72,
+          "total_tokens": 924
+        },
+        {
+          "step": 3,
+          "action": "GenerateSQL",
+          "prompt_tokens": 411,
+          "completion_tokens": 78,
+          "total_tokens": 489
+        },
+        {
+          "step": 4,
+          "action": "RunSQL",
+          "prompt_tokens": 1004,
+          "completion_tokens": 116,
+          "total_tokens": 1120
+        },
+        {
+          "step": 5,
+          "action": "RunSQL",
+          "prompt_tokens": 1144,
+          "completion_tokens": 58,
+          "total_tokens": 1202
+        },
+        {
+          "step": 6,
+          "action": "RunSQL",
+          "prompt_tokens": 1229,
+          "completion_tokens": 70,
+          "total_tokens": 1299
+        }
+      ],
+      "success": false,
+      "final_sql": null
+    },
+    "min_tokens_sample": {
+      "sample_id": "sample_5",
+      "question": "How many buildings are there?",
+      "db_id": "region_building",
+      "prompt_tokens": 1885,
+      "completion_tokens": 105,
+      "total_tokens": 1990,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 481,
+          "completion_tokens": 35,
+          "total_tokens": 516
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 301,
+          "completion_tokens": 7,
+          "total_tokens": 308
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 526,
+          "completion_tokens": 30,
+          "total_tokens": 556
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 577,
+          "completion_tokens": 33,
+          "total_tokens": 610
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT COUNT(*) FROM building;"
+    }
+  },
+  "samples": [
+    {
+      "sample_id": "sample_1",
+      "question": "Show all staff names who have been both speaker and sponsor in some conference.",
+      "db_id": "conference",
+      "prompt_tokens": 6355,
+      "completion_tokens": 629,
+      "total_tokens": 6984,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 591,
+          "completion_tokens": 53,
+          "total_tokens": 644
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 410,
+          "completion_tokens": 68,
+          "total_tokens": 478
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 714,
+          "completion_tokens": 114,
+          "total_tokens": 828
+        },
+        {
+          "step": 3,
+          "action": "ReActStep",
+          "prompt_tokens": 852,
+          "completion_tokens": 72,
+          "total_tokens": 924
+        },
+        {
+          "step": 3,
+          "action": "GenerateSQL",
+          "prompt_tokens": 411,
+          "completion_tokens": 78,
+          "total_tokens": 489
+        },
+        {
+          "step": 4,
+          "action": "RunSQL",
+          "prompt_tokens": 1004,
+          "completion_tokens": 116,
+          "total_tokens": 1120
+        },
+        {
+          "step": 5,
+          "action": "RunSQL",
+          "prompt_tokens": 1144,
+          "completion_tokens": 58,
+          "total_tokens": 1202
+        },
+        {
+          "step": 6,
+          "action": "RunSQL",
+          "prompt_tokens": 1229,
+          "completion_tokens": 70,
+          "total_tokens": 1299
+        }
+      ],
+      "success": false,
+      "final_sql": null
+    },
+    {
+      "sample_id": "sample_2",
+      "question": "Give the ids for goods that have Apricot flavor and have a price lower than 5 dollars.",
+      "db_id": "bakery_1",
+      "prompt_tokens": 2251,
+      "completion_tokens": 182,
+      "total_tokens": 2433,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 545,
+          "completion_tokens": 56,
+          "total_tokens": 601
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 365,
+          "completion_tokens": 18,
+          "total_tokens": 383
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 622,
+          "completion_tokens": 59,
+          "total_tokens": 681
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 719,
+          "completion_tokens": 49,
+          "total_tokens": 768
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT Id FROM goods WHERE Flavor = 'Apricot' AND Price < 5;"
+    },
+    {
+      "sample_id": "sample_3",
+      "question": "Give the full names of artists who have created paintings and sculptures.",
+      "db_id": "art_1",
+      "prompt_tokens": 2645,
+      "completion_tokens": 240,
+      "total_tokens": 2885,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 626,
+          "completion_tokens": 61,
+          "total_tokens": 687
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 453,
+          "completion_tokens": 44,
+          "total_tokens": 497
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 734,
+          "completion_tokens": 68,
+          "total_tokens": 802
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 832,
+          "completion_tokens": 67,
+          "total_tokens": 899
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT DISTINCT A.fname, A.lname FROM Artists A JOIN Paintings P ON A.artistID = P.painterID JOIN Sculptures S ON A.artistID = S.sculptorID;"
+    },
+    {
+      "sample_id": "sample_4",
+      "question": "Show me the distance between Boston and Newark.",
+      "db_id": "address_1",
+      "prompt_tokens": 2509,
+      "completion_tokens": 274,
+      "total_tokens": 2783,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 587,
+          "completion_tokens": 51,
+          "total_tokens": 638
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 418,
+          "completion_tokens": 59,
+          "total_tokens": 477
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 700,
+          "completion_tokens": 84,
+          "total_tokens": 784
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 804,
+          "completion_tokens": 80,
+          "total_tokens": 884
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT d.distance FROM Direct_distance d JOIN City c1 ON d.city1_code = c1.city_code JOIN City c2 ON d.city2_code = c2.city_code WHERE c1.city_name = 'Boston' AND c2.city_name = 'Newark';"
+    },
+    {
+      "sample_id": "sample_5",
+      "question": "How many buildings are there?",
+      "db_id": "region_building",
+      "prompt_tokens": 1885,
+      "completion_tokens": 105,
+      "total_tokens": 1990,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 481,
+          "completion_tokens": 35,
+          "total_tokens": 516
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 301,
+          "completion_tokens": 7,
+          "total_tokens": 308
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 526,
+          "completion_tokens": 30,
+          "total_tokens": 556
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 577,
+          "completion_tokens": 33,
+          "total_tokens": 610
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT COUNT(*) FROM building;"
+    },
+    {
+      "sample_id": "sample_6",
+      "question": "Which planet has total weight of shipment greater than 30? List planet name.",
+      "db_id": "planet_1",
+      "prompt_tokens": 3057,
+      "completion_tokens": 235,
+      "total_tokens": 3292,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 738,
+          "completion_tokens": 40,
+          "total_tokens": 778
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 555,
+          "completion_tokens": 52,
+          "total_tokens": 607
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 833,
+          "completion_tokens": 70,
+          "total_tokens": 903
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 931,
+          "completion_tokens": 73,
+          "total_tokens": 1004
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT Planet.Name FROM Planet JOIN Shipment ON Planet.PlanetID = Shipment.Planet JOIN Package ON Shipment.ShipmentID = Package.Shipment GROUP BY Planet.PlanetID HAVING SUM(Package.Weight) > 30;"
+    },
+    {
+      "sample_id": "sample_7",
+      "question": "Show the customers with total quantity of order bigger than 1.",
+      "db_id": "restaurant_bills",
+      "prompt_tokens": 2301,
+      "completion_tokens": 238,
+      "total_tokens": 2539,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 540,
+          "completion_tokens": 58,
+          "total_tokens": 598
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 359,
+          "completion_tokens": 46,
+          "total_tokens": 405
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 647,
+          "completion_tokens": 63,
+          "total_tokens": 710
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 755,
+          "completion_tokens": 71,
+          "total_tokens": 826
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT customer.Name, SUM(customer_order.Quantity) AS Total_Quantity FROM customer JOIN customer_order ON customer.Customer_ID = customer_order.Customer_ID GROUP BY customer.Customer_ID HAVING Total_Quantity > 1;"
+    },
+    {
+      "sample_id": "sample_8",
+      "question": "What are the product type code with at least two products?",
+      "db_id": "customers_and_orders",
+      "prompt_tokens": 1939,
+      "completion_tokens": 115,
+      "total_tokens": 2054,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 684,
+          "completion_tokens": 41,
+          "total_tokens": 725
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 502,
+          "completion_tokens": 25,
+          "total_tokens": 527
+        },
+        {
+          "step": 2,
+          "action": "FinalAnswer",
+          "prompt_tokens": 753,
+          "completion_tokens": 49,
+          "total_tokens": 802
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT product_type_code FROM Products GROUP BY product_type_code HAVING COUNT(product_id) >= 2;"
+    },
+    {
+      "sample_id": "sample_9",
+      "question": "Return the maximum and minimum enrollment across all institutions.",
+      "db_id": "institution_sports",
+      "prompt_tokens": 2183,
+      "completion_tokens": 170,
+      "total_tokens": 2353,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 536,
+          "completion_tokens": 40,
+          "total_tokens": 576
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 355,
+          "completion_tokens": 22,
+          "total_tokens": 377
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 601,
+          "completion_tokens": 55,
+          "total_tokens": 656
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 691,
+          "completion_tokens": 53,
+          "total_tokens": 744
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT MAX(Enrollment) AS Max_Enrollment, MIN(Enrollment) AS Min_Enrollment FROM institution;"
+    },
+    {
+      "sample_id": "sample_10",
+      "question": "What is the number of all packages that Leo Wong sent?",
+      "db_id": "planet_1",
+      "prompt_tokens": 2969,
+      "completion_tokens": 169,
+      "total_tokens": 3138,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 734,
+          "completion_tokens": 45,
+          "total_tokens": 779
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 549,
+          "completion_tokens": 27,
+          "total_tokens": 576
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 809,
+          "completion_tokens": 47,
+          "total_tokens": 856
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 877,
+          "completion_tokens": 50,
+          "total_tokens": 927
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT COUNT(*) FROM Package JOIN Client ON Package.Sender = Client.AccountNumber WHERE Client.Name = 'Leo Wong';"
+    },
+    {
+      "sample_id": "sample_11",
+      "question": "What is the average card credit of customers with membership level higher than 1?",
+      "db_id": "restaurant_bills",
+      "prompt_tokens": 2220,
+      "completion_tokens": 173,
+      "total_tokens": 2393,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 543,
+          "completion_tokens": 48,
+          "total_tokens": 591
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 364,
+          "completion_tokens": 26,
+          "total_tokens": 390
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 620,
+          "completion_tokens": 46,
+          "total_tokens": 666
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 693,
+          "completion_tokens": 53,
+          "total_tokens": 746
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT AVG(Card_Credit) AS Average_Card_Credit FROM customer WHERE Level_of_Membership > 1;"
+    },
+    {
+      "sample_id": "sample_12",
+      "question": "List all address ids and address details.",
+      "db_id": "customers_and_orders",
+      "prompt_tokens": 2951,
+      "completion_tokens": 127,
+      "total_tokens": 3078,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 680,
+          "completion_tokens": 40,
+          "total_tokens": 720
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 503,
+          "completion_tokens": 10,
+          "total_tokens": 513
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 733,
+          "completion_tokens": 37,
+          "total_tokens": 770
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 1035,
+          "completion_tokens": 40,
+          "total_tokens": 1075
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT address_id, address_details FROM Addresses;"
+    },
+    {
+      "sample_id": "sample_13",
+      "question": "Give the flavors of Cakes that are not available for Tart.",
+      "db_id": "bakery_1",
+      "prompt_tokens": 2274,
+      "completion_tokens": 243,
+      "total_tokens": 2517,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 537,
+          "completion_tokens": 37,
+          "total_tokens": 574
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 355,
+          "completion_tokens": 58,
+          "total_tokens": 413
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 635,
+          "completion_tokens": 76,
+          "total_tokens": 711
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 747,
+          "completion_tokens": 72,
+          "total_tokens": 819
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT DISTINCT g1.Flavor FROM goods AS g1 WHERE g1.Food = 'Cake' AND g1.Flavor NOT IN (SELECT g2.Flavor FROM goods AS g2 WHERE g2.Food = 'Tart');"
+    },
+    {
+      "sample_id": "sample_14",
+      "question": "Show the book title and purchase price of the book that has had the greatest amount in orders.",
+      "db_id": "book_1",
+      "prompt_tokens": 2763,
+      "completion_tokens": 229,
+      "total_tokens": 2992,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 664,
+          "completion_tokens": 50,
+          "total_tokens": 714
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 482,
+          "completion_tokens": 46,
+          "total_tokens": 528
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 762,
+          "completion_tokens": 63,
+          "total_tokens": 825
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 855,
+          "completion_tokens": 70,
+          "total_tokens": 925
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT Book.Title, Book.PurchasePrice FROM Book JOIN Books_Order ON Book.ISBN = Books_Order.ISBN GROUP BY Book.ISBN ORDER BY SUM(Books_Order.amount) DESC LIMIT 1;"
+    },
+    {
+      "sample_id": "sample_15",
+      "question": "Find the first names and number of works of all artists who have at least two paintings?",
+      "db_id": "art_1",
+      "prompt_tokens": 2669,
+      "completion_tokens": 249,
+      "total_tokens": 2918,
+      "steps": [
+        {
+          "step": 1,
+          "action": "ReActStep",
+          "prompt_tokens": 631,
+          "completion_tokens": 48,
+          "total_tokens": 679
+        },
+        {
+          "step": 1,
+          "action": "GenerateSQL",
+          "prompt_tokens": 449,
+          "completion_tokens": 51,
+          "total_tokens": 500
+        },
+        {
+          "step": 2,
+          "action": "RunSQL",
+          "prompt_tokens": 733,
+          "completion_tokens": 75,
+          "total_tokens": 808
+        },
+        {
+          "step": 3,
+          "action": "FinalAnswer",
+          "prompt_tokens": 856,
+          "completion_tokens": 75,
+          "total_tokens": 931
+        }
+      ],
+      "success": true,
+      "final_sql": "SELECT fname, COUNT(paintingID) AS num_paintings FROM Artists JOIN Paintings ON Artists.artistID = Paintings.painterID GROUP BY Artists.artistID HAVING COUNT(paintingID) >= 2;"
+    }
+  ]
+}
