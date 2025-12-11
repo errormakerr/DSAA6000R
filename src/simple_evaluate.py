@@ -15,7 +15,7 @@ def _ensure_nltk_resources():
 
 _ensure_nltk_resources()
 
-"""
+""" 
 简化的评估例子 - 直接运行
 """
 import subprocess
