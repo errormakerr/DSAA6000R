@@ -9,6 +9,10 @@ import pandas as pd
 from typing import Dict, List, Tuple
 from datetime import datetime
 import random
+# Import new modules for multi-strategy generation and ranking
+from prompt_strategies import PromptStrategies, load_few_shot_examples
+from ranking_module import select_best_sql, RERANKER_AVAILABLE
+
 
 # ================== 基础配置 ==================
 DB_DICT = "data\\test_database"
@@ -19,8 +23,8 @@ PRED_SQL_PATH = "eval_data\\react_pred.sql"
 TOKEN_STATS_PATH = "evaldata\\token_statistics.json"
 
 client = OpenAI(
-    base_url="",  # 填入你的 API 地址
-    api_key=""     # 填入你的 API Key
+    base_url="https://vip.yi-zhan.top/v1",  # 填入你的 API 地址
+    api_key="sk-PhWga2qw2g8QgLq0F7A49c3039F8430aB80f5f0bA46d65Fb"     # 填入你的 API Key
 )
 
 # ================== Token 统计类 ==================
@@ -156,6 +160,87 @@ class TokenTracker:
 
 # 创建全局 token tracker
 token_tracker = TokenTracker()
+
+# ================== Smart SQL Generation (Multi-Strategy + Ranking) ==================
+def smart_generate_sql(query: str, schema: str, step_num: int) -> str:
+    """
+    Generate SQL using multi-strategy prompting and ranking.
+    Uses Base, CoT, and Few-Shot strategies, then ranks by back-translation similarity.
+    """
+    print(f"\n{'='*50}")
+    print("🎯 Smart SQL Generation (Step 1)")
+    print(f"{'='*50}")
+
+    # Initialize prompt strategies
+    few_shot_examples = load_few_shot_examples("gold_with_difficulty.json", count=5)
+    strategies = PromptStrategies(few_shot_examples)
+
+    # Generate prompts for all three strategies
+    prompts = strategies.get_all_prompts(query, schema)
+
+    sql_candidates = []
+    total_tokens = 0
+
+    # Generate SQL using each strategy
+    for strategy_name, prompt in prompts.items():
+        print(f"\n🔄 Generating with {strategy_name.upper()} strategy...")
+        try:
+            response = client.chat.completions.create(
+                model="gpt-4o",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.2,
+            )
+
+            usage = response.usage
+            total_tokens += usage.total_tokens
+
+            sql = response.choices[0].message.content.strip()
+            # Extract SQL from CoT response (take last line that looks like SQL)
+            if strategy_name == 'cot':
+                lines = sql.split('\n')
+                for line in reversed(lines):
+                    line = line.strip()
+                    if line.upper().startswith('SELECT') or line.upper().startswith('INSERT') or line.upper().startswith('UPDATE') or line.upper().startswith('DELETE'):
+                        sql = line
+                        break
+
+            sql = re.sub(r"^```sql\s*|```$", "", sql, flags=re.IGNORECASE | re.MULTILINE).strip()
+            sql_candidates.append(sql)
+            print(f"   Generated: {sql[:80]}...")
+
+        except Exception as e:
+            print(f"   ❌ Error with {strategy_name}: {e}")
+            sql_candidates.append("")
+
+    # Filter out empty candidates
+    valid_candidates = [sql for sql in sql_candidates if sql]
+
+    if not valid_candidates:
+        print("❌ No valid SQL candidates generated")
+        return ""
+
+    if len(valid_candidates) == 1:
+        print("ℹ️ Only one valid candidate, skipping ranking")
+        best_sql = valid_candidates[0]
+    elif RERANKER_AVAILABLE:
+        # Use ranking to select best SQL
+        best_sql, metadata = select_best_sql(query, valid_candidates, schema)
+    else:
+        # Fallback: use first valid candidate
+        print("⚠️ Reranker not available, using first candidate")
+        best_sql = valid_candidates[0]
+
+    # Track tokens for this step
+    token_tracker.add_step(
+        step_num=step_num,
+        action="SmartGenerateSQL",
+        prompt_tokens=0,  # Aggregate tracking
+        completion_tokens=0,
+        total_tokens=total_tokens
+    )
+
+    print(f"\n✅ Best SQL selected: {best_sql}")
+    return best_sql
 
 # ================== SQL 执行 ==================
 def run_sql(query: str, DB_PATH: str):
@@ -324,8 +409,12 @@ Now continue:
                     total_tokens=usage.total_tokens
                 )
                 
-                # GenerateSQL 会在内部记录自己的 token
-                sql = nl_to_sql(arg, schema, step)
+                # Step 1: Use smart generation (multi-strategy + ranking)
+                # Later steps: Use simple nl_to_sql for error recovery
+                if step == 1:
+                    sql = smart_generate_sql(arg, schema, step)
+                else:
+                    sql = nl_to_sql(arg, schema, step)
                 if sql:
                     obs = f"SQL generated: {sql}"
                     print(f"Observation: {obs}")
