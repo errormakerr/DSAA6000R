@@ -23,8 +23,8 @@ PRED_SQL_PATH = "eval_data\\react_pred.sql"
 TOKEN_STATS_PATH = "evaldata\\token_statistics.json"
 
 client = OpenAI(
-    base_url="https://vip.yi-zhan.top/v1",  # 填入你的 API 地址
-    api_key="sk-PhWga2qw2g8QgLq0F7A49c3039F8430aB80f5f0bA46d65Fb"     # 填入你的 API Key
+    base_url="",  # 填入你的 API 地址
+    api_key=""     # 填入你的 API Key
 )
 
 # ================== Token 统计类 ==================
