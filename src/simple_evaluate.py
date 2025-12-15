@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
+import os
+import subprocess
 import nltk
+
+
 def _ensure_nltk_resources():
     try:
         nltk.data.find('tokenizers/punkt')
@@ -13,49 +17,64 @@ def _ensure_nltk_resources():
         except Exception:
             pass
 
+
 _ensure_nltk_resources()
 
-""" 
+"""
 简化的评估例子 - 直接运行
 """
-import subprocess
-import os
 
-# 设置文件路径
-GOLD_PATH = 'data\\test_gold.sql'
-PRED_PATH = 'eval_data\\react_pred.sql'
-DB_PATH = 'data\\test_database'
-SCHEMA_PATH = 'data\\test_tables.json'
+# 当前脚本所在目录：DSAA_6000R/src
+SRC_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# 项目根目录：DSAA_6000R
+ROOT_DIR = os.path.dirname(SRC_DIR)
+
+# 评估脚本：用 src 目录下的 evaluation.py
+EVAL_SCRIPT = os.path.join(SRC_DIR, "evaluation.py")
+
+# 数据路径（都在项目根目录下）
+GOLD_PATH = os.path.join(ROOT_DIR, "data", "test_gold.sql")
+PRED_PATH = os.path.join(ROOT_DIR, "eval_data", "react_pred.sql")
+DB_PATH = os.path.join(ROOT_DIR, "data", "test_database")
+SCHEMA_PATH = os.path.join(ROOT_DIR, "data", "test_tables.json")
+
 
 def evaluate_sql():
-    # 设置文件路径
-    gold_file=GOLD_PATH
-    pred_file=PRED_PATH
-    db_dir=DB_PATH
-    table_file=SCHEMA_PATH
-
-    # 切换到spider目录并运行评估
     cmd = [
-        'python', 'evaluation.py',
-        '--gold', gold_file,
-        '--pred', pred_file,
-        '--db', db_dir,
-        '--table', table_file,
-        '--etype', 'match'  # 评估exact match和partial match
+        "python",
+        EVAL_SCRIPT,
+        "--gold",
+        GOLD_PATH,
+        "--pred",
+        PRED_PATH,
+        "--db",
+        DB_PATH,
+        "--table",
+        SCHEMA_PATH,
+        "--etype",
+        "match",  # 评估 exact match 和 partial match
     ]
 
-    print("执行命令:", ' '.join(cmd))
+    print("执行命令:", " ".join(cmd))
     print("=" * 80)
 
-    # 运行评估
+    # 工作目录设为项目根目录，这样 evaluation.py 里若用相对路径，也能找到 data/ 等
     result = subprocess.run(
         cmd,
-        cwd='spider-master',
-        capture_output=False,
-        text=True
+        cwd=ROOT_DIR,
+        capture_output=True,  # 捕获输出，方便调试；如果想直接打印可设为 False
+        text=True,
     )
+
+    print("【STDOUT】")
+    print(result.stdout)
+    if result.stderr:
+        print("【STDERR】")
+        print(result.stderr)
 
     return result
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     evaluate_sql()

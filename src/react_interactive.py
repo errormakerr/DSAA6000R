@@ -17,10 +17,10 @@ from ranking_module import select_best_sql, RERANKER_AVAILABLE
 # ================== 基础配置 ==================
 DB_DICT = "data\\test_database"
 SCHEMAS_PATH = "data\\test_tables.json"
-TEST_DATAS_PATH = "data\\few_test.json"
+TEST_DATAS_PATH = "data\\test.json"
 
 PRED_SQL_PATH = "eval_data\\react_pred.sql"
-TOKEN_STATS_PATH = "evaldata\\token_statistics.json"
+TOKEN_STATS_PATH = "eval_data\\token_statistics.json"
 
 client = OpenAI(
     base_url="https://vip.yi-zhan.top/v1",  # 填入你的 API 地址
